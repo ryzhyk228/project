@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1 id="productName"></h1>
+<p id="productPrice"></p>
+<p id="productDesc"></p>
+<button class="btn" id="addBtn">Додати в кошик</button>
+ <a href="ruzhuk.html">Повернутися до покупок</a>
+ <script>
+    const products = [
+        { id: 1, name: "І волейбольні красовки ", price: 200, desc: "Дуже класні красовки!" },
+        { id: 2, name: ">волейбольний м'яч", price: 150, desc: "дуже приємний на дотик ." }
+         { id: 3, name: ">волейбольний наколінники", price: 150, desc: "двони дуже м'ягкіИ ." }
+    ];
+
+    const url = new URLSearchParams(window.location.search);
+    const id = Number(url.get("id"));
+    const product = products.find(p => p.id === id);
+
+    document.getElementById("productName").textContent = product.name;
+    document.getElementById("productPrice").textContent = "Ціна: " + product.price + " грн";
+    document.getElementById("productDesc").textContent = product.desc;
+
+    document.getElementById("addBtn").onclick = function () {
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        cart.push({ name: product.name, price: product.price });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Товар додано!");
+    };
+</script>
+
+</body>
+</html>

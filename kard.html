@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Кошик</title>
+    <style>
+      body {
+        font-family: Arial;
+        padding: 20px;
+      }
+      .item {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Кошик</h1>
+
+    <div id="cart"></div>
+
+    <br />
+    <a href="ruzhuk.html">Повернутися до покупок</a>
+
+    <script>
+      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      let block = document.getElementById("cart");
+
+      if (cart.length === 0) {
+        block.innerHTML = "<p>Кошик порожній</p>";
+      } else {
+        cart.forEach((item) => {
+          block.innerHTML += `<div class="item">${item.name} – ${item.price} грн</div>`;
+        });
+      }
+    </script>
+  </body>
+</html>
